@@ -1,0 +1,201 @@
+/* -------------------------
+   Global Styles
+-------------------------- */
+:root {
+  --radius: 16px;
+  --transition: all 0.25s ease;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+
+/* -------------------------
+   Background (softer medical gradient)
+-------------------------- */
+.bg-pattern {
+  background: linear-gradient(135deg, #f0f9ff 0%, #cbebff 50%, #d6e6f2 100%);
+  min-height: 100vh;
+  color: #2c3e50;
+}
+
+/* -------------------------
+   Navbar (glassy)
+-------------------------- */
+.navbar-glass {
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+
+.navbar-glass .navbar-brand,
+.navbar-glass .nav-link {
+  color: #2c3e50 !important;
+  font-weight: 600;
+}
+
+.navbar-glass .nav-link:hover {
+  color: #0d6efd !important;
+}
+
+/* -------------------------
+   Hero Section
+-------------------------- */
+.hero {
+  padding-top: 8rem;
+  padding-bottom: 3rem;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.hero h1 {
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: .4rem .8rem;
+  border-radius: 999px;
+  background: #e3f2fd;
+  color: #0d6efd;
+  font-weight: 600;
+  font-size: .9rem;
+  margin-bottom: 1rem;
+  border: 1px solid #bbdefb;
+}
+
+/* -------------------------
+   Cards (glass style)
+-------------------------- */
+.card-link {
+  text-decoration: none;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  color: #2c3e50;
+  box-shadow: 0 6px 16px rgba(0,0,0,.1);
+  transition: var(--transition);
+}
+
+.card-link:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.15);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.card {
+  border-radius: var(--radius);
+}
+
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background: #e3f2fd;
+  color: #0d6efd;
+}
+
+/* -------------------------
+   Upload Form
+-------------------------- */
+.upload-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,.1);
+  color: #2c3e50;
+}
+
+.fancy-input {
+  border: 2px dashed #90caf9;
+  background: #f5f9ff;
+  color: #2c3e50;
+}
+
+.fancy-input::file-selector-button {
+  background: #e3f2fd;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+.fancy-input:hover,
+.fancy-input:focus {
+  border-color: #0d6efd;
+  outline: none;
+}
+
+/* -------------------------
+   Buttons
+-------------------------- */
+.btn-subtle {
+  background: #f5f9ff;
+  border: 1px solid #bbdefb;
+  color: #0d6efd;
+  transition: var(--transition);
+}
+
+.btn-subtle:hover {
+  background: #e3f2fd;
+}
+
+/* -------------------------
+   Image Cards
+-------------------------- */
+.img-card .card-header {
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+  background: transparent;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.img-card img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* -------------------------
+   Badges
+-------------------------- */
+.badge {
+  padding: .55rem .75rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* -------------------------
+   Footer
+-------------------------- */
+footer {
+  color: #555;
+}
+
+footer a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

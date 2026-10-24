@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8"/>
+  <title>{{ method|upper }} Segmentation</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- ✅ Correct static link -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-pattern">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-glass fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/"><i class="bi bi-activity me-2"></i>MedSeg</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbars">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('segment', method='yolo') }}">YOLO</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('segment', method='unet') }}">UNet</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container pt-nav pb-5">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center mb-4 gap-2">
+      <h2 class="mb-0">{{ method|upper }} Segmentation</h2>
+      <a href="{{ url_for('home') }}" class="btn btn-subtle"><i class="bi bi-arrow-left"></i> Back</a>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-warning shadow-sm">
+          {% for m in messages %}<div>{{ m }}</div>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data" class="upload-card mb-4">
+      <div class="d-flex flex-column flex-md-row align-items-md-center gap-3">
+        <div class="flex-fill">
+          <label class="form-label fw-semibold mb-2">Upload an image</label>
+          <input type="file" name="image" required class="form-control form-control-lg fancy-input"/>
+          <div class="form-text">Supported formats: PNG, JPG. Max 25MB.</div>
+        </div>
+        <div class="text-md-end">
+          <button class="btn btn-primary btn-lg" type="submit">
+            <i class="bi bi-magic"></i> Upload & Run
+          </button>
+        </div>
+      </div>
+    </form>
+
+    {% if orig %}
+      {% if classes %}
+        <div class="mb-3">
+          <span class="fw-semibold me-2">Predicted classes:</span>
+          {% for c in classes %}
+            <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis me-1">{{ c }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm img-card h-100">
+            <div class="card-header bg-transparent fw-semibold">Original</div>
+            <img src="{{ url_for('static', filename=orig) }}" class="card-img-bottom rounded-bottom"/>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm img-card h-100">
+            <div class="card-header bg-transparent fw-semibold">Mask</div>
+            <img src="{{ url_for('static', filename=mask) }}" class="card-img-bottom rounded-bottom"/>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm img-card h-100">
+            <div class="card-header bg-transparent fw-semibold">Overlay</div>
+            <img src="{{ url_for('static', filename=overlay) }}" class="card-img-bottom rounded-bottom"/>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
